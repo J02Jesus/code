@@ -1,0 +1,47 @@
+/******************************************************************************
+
+convertendo de binario para decimal
+
+*******************************************************************************/
+#include <stdio.h>
+
+int main() {
+    char matriz_binaria[1][1][9]; 
+    char matriz_ascii[2][2];
+    int i, j, k;
+    char valor;
+
+   
+    for (i = 0; i < 2; i++) {
+        for (j = 0; j < 2; j++) {
+            printf("Digite o valor binário da posição [%d][%d] (8 bits): ", i, j);
+           fgets( matriz_binaria[i][j], 255, stdin); 
+            if (matriz_binaria[i][j][8] == '\n') {
+                matriz_binaria[i][j][8] = '\0';
+            }
+        }
+    }
+    for (i = 0; i < 2; i++) {
+        for (j = 0; j < 2; j++) {
+            int valor = 0;
+            int potencia = 1;
+            for (k = 7; k >= 0; k--) {
+                if (matriz_binaria[i][j][k] == '1') {
+                    valor += potencia;
+                }
+                potencia *= 2;
+            }
+
+            matriz_ascii[i][j] =valor; 
+        }
+    }
+    printf("\nValores ASCII convertidos:\n");
+    for (i = 0; i < 2; i++) {
+        for (j = 0; j < 2; j++) {
+            printf("%d ", (unsigned char)matriz_ascii[i][j]);
+        }
+        printf("\n");
+    }
+
+    return 0;
+}
